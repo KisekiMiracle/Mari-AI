@@ -2,34 +2,25 @@ import { useActionState, useState } from "react";
 import { FaLocationArrow } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { IoKeyOutline } from "react-icons/io5";
+import supabase from "../../src/supabase/client";
 import { NeumorphButton, TextInput } from "../index";
 
-// Mock API call with proper TypeScript typing
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const submitUserData = async (prevState: any, formData: FormData) => {
 	try {
-		// Simulate API call
-		await new Promise((resolve) => setTimeout(resolve, 2000));
+		const { data, error } = await supabase.auth.signInWithPassword({
+			email: (formData.get("email") as string) || "",
+			password: (formData.get("password") as string) || "",
+		});
 
-		// Get form values
-		const email = formData.get("email") as string;
-		const password = formData.get("password") as string;
-
-		// Validate inputs
-		if (!email.includes("@")) {
-			return { type: "invalidEmail", error: "Invalid email address" };
+		if (error) {
+			return { error: error };
 		}
 
-		if (password.length < 6) {
-			return {
-				type: "passwordError",
-				error: "Password must be at least 6 characters",
-			};
-		}
-
-		return { success: true, email };
+		console.log("User data:", data);
+		return { success: true, email: data.user?.email };
 	} catch (error) {
-		return { type: "loginFailed", error: "Login failed. Please try again." };
+		alert(error);
 	}
 };
 
@@ -55,7 +46,6 @@ export function LoginForm() {
 					icon={<FiMail />}
 					type="email"
 					required
-					errorData={state?.type === "invalidEmail" ? state?.error : ""}
 				/>
 				<TextInput
 					label="Password"
@@ -65,7 +55,6 @@ export function LoginForm() {
 					type="password"
 					required
 					minLength={6}
-					errorData={state?.type === "passwordError" ? state?.error : ""}
 				/>
 				<NeumorphButton
 					type="submit"
@@ -74,9 +63,13 @@ export function LoginForm() {
 					icon={<FaLocationArrow />}
 				/>
 
-				{state?.success && (
-					<p className="text-green-500">Logged in as {state.email}</p>
-				)}
+				{state?.error ? (
+					<div>
+						{state.error.status}
+						{state.error.code}
+						{state.error.message}
+					</div>
+				) : null}
 			</form>
 		</div>
 	);

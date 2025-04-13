@@ -7,7 +7,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface InputProps extends ComponentPropsWithoutRef<"input"> {
 	label: string;
-	icon?: React.ReactElement;
+	icon?: ReactElement;
 	errorData?: string;
 }
 
@@ -40,7 +40,7 @@ export function TextInput({
 	required,
 	minLength,
 	errorData,
-}: InputProps): React.ReactElement {
+}: InputProps): ReactElement {
 	const [isPasswordMasked, setIsPasswordMasked] = useState(true);
 	const isPasswordField = type === "password";
 	const inputType = isPasswordField

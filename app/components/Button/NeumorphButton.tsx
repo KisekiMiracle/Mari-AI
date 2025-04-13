@@ -13,7 +13,8 @@ export function NeumorphButton({
 	disabled = false,
 	icon,
 	parentMethod,
-}: ButtonProps): React.ReactElement {
+	...props
+}: ButtonProps) {
 	return (
 		<button
 			type={type}

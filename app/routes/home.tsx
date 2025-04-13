@@ -8,5 +8,5 @@ export function meta({ matches }: Route.MetaArgs) {
 }
 
 export default function Home() {
-	return <>Hey, this is the HomePage!</>;
+	return <>Hey, this is the HomePage! </>;
 }
