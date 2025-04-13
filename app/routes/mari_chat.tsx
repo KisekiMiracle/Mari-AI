@@ -1,6 +1,5 @@
 import { CiSettings } from "react-icons/ci";
 import { FaLocationArrow, FaRegKeyboard } from "react-icons/fa";
-import { HiMagnifyingGlassPlus } from "react-icons/hi2";
 import { IoMdAdd } from "react-icons/io";
 import { IoStatsChart } from "react-icons/io5";
 import { LuBrain } from "react-icons/lu";
