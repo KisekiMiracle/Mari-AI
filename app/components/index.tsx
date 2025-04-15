@@ -3,3 +3,8 @@ export { LoginForm } from "./Form/LoginForm";
 export { TextInput } from "./Input/TextInput";
 export { FlatButton } from "./Button/FlatButton";
 export { DropdownButton } from "./Button/DropdownButton";
+export { SidebarNav } from "./Navigation/SidebarNav";
+export { ChatInput } from "./Input/ChatInput";
+export { ChatContent } from "./Content/ChatContent";
+export { ChatHeader } from "./Navigation/ChatHeader";
+export { ChatSpeechBubble } from "./Notification/ChatSpeechBubble";

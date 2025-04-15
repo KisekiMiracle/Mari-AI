@@ -13,7 +13,7 @@ export function ChatInput({
 	...props
 }: ChatInputProps) {
 	return (
-		<div className="flex flex-col gap-4">
+		<div {...props} className="flex flex-col gap-4">
 			<label className="w-full bg-white">
 				<div
 					className="
@@ -23,12 +23,12 @@ export function ChatInput({
                 transition-colors duration-200
                 focus-within:border-blue-500 focus-within:text-blue-500"
 				>
-					<div className="flex items-center gap-4">
+					<div className="flex grow items-center gap-4">
 						{leadingIcon}
 						<input
 							type="text"
 							placeholder={label}
-							className="text-black focus:border-0 focus:outline-none"
+							className="w-full text-lg text-gray-900 focus:border-0 focus:outline-none caret-blue-700"
 						/>
 					</div>
 					{trailingIcon}

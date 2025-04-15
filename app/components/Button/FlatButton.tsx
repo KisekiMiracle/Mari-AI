@@ -29,13 +29,16 @@ export function FlatButton({
 }
 
 const buttonvariants = cva(
-	"flex justify-between items-center py-1.5 px-2.5 rounded-md transition-colors duration-150 hover:cursor-pointer",
+	"flex h-fit justify-between items-center py-1.5 px-2.5 rounded-md shadow-mssm transition-colors duration-150 hover:cursor-pointer",
 	{
 		variants: {
 			variant: {
-				primary: "bg-pink-600 text-white",
+				primary: "bg-pink-600 text-white hover:bg-pink-500",
 				secondary: "border",
-				sidenav: "font-semibold hover:bg-gray-100 hover:text-pink-600",
+				sidenav: cn(
+					"font-semibold hover:bg-gray-100 hover:text-pink-600",
+					"data-[state=open]:bg-pink-600 data-[state=open]:text-white",
+				),
 			},
 		},
 		defaultVariants: {

@@ -4,6 +4,7 @@ import {
 	useState,
 } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { cn } from "../utils/cn";
 
 interface InputProps extends ComponentPropsWithoutRef<"input"> {
 	label: string;
@@ -27,10 +28,6 @@ function PasswordVisibilityToggler({
 	);
 }
 
-function ErrorDiagnostic() {
-	return <p>Error!</p>;
-}
-
 export function TextInput({
 	label,
 	name,
@@ -40,6 +37,8 @@ export function TextInput({
 	required,
 	minLength,
 	errorData,
+	className,
+	...props
 }: InputProps): ReactElement {
 	const [isPasswordMasked, setIsPasswordMasked] = useState(true);
 	const isPasswordField = type === "password";
@@ -50,7 +49,12 @@ export function TextInput({
 		: type;
 
 	return (
-		<label className="flex flex-col gap-y-2.5 font-semibold text-gray-900">
+		<label
+			className={cn(
+				"flex flex-col gap-y-2.5 font-semibold text-gray-900",
+				className,
+			)}
+		>
 			<p
 				className={`
                 after:content-['*'] after:text-pink-600 ${!required ? "after:hidden" : ""}
@@ -68,6 +72,7 @@ export function TextInput({
 			>
 				{icon}
 				<input
+					{...props}
 					className="focus:outline-none flex-1 text-gray-900 placeholder:text-gray-400"
 					type={inputType}
 					autoComplete={isPasswordField ? "current-password" : "off"}
@@ -85,7 +90,6 @@ export function TextInput({
 					/>
 				) : null}
 			</div>
-			<p className="text-red-500">{errorData}</p>
 		</label>
 	);
 }
